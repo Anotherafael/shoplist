@@ -11,6 +11,10 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.4.9
+  get_it: ^7.6.7
+  google_fonts: ^6.1.0
+  lottie: ^3.0.0
   uuid: ^4.3.3
 
 dev_dependencies:
@@ -20,3 +24,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/animations/
+    # - assets/images/
