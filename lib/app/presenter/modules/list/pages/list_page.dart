@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shoplist/app/presenter/core/injection_container.dart';
+import 'package:shoplist/app/presenter/modules/list/components/list_item.dart';
+import 'package:shoplist/app/providers/shop_item_provider.dart';
+
+import '../../../../infra/models/shop_item_model.dart';
+import '../controllers/list_page_controller.dart';
 
 class ListPage extends ConsumerStatefulWidget {
   const ListPage({super.key});
@@ -9,6 +15,8 @@ class ListPage extends ConsumerStatefulWidget {
 }
 
 class _ListPageState extends ConsumerState<ListPage> {
+  final _controller = getIt<ListPageController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,27 +40,23 @@ class _ListPageState extends ConsumerState<ListPage> {
       ),
       body: Container(
         color: Theme.of(context).colorScheme.background,
-        child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (_, index) {
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                child: const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-              ),
-              title: const Text('Título'),
-              subtitle: const Text('Subtítulo'),
-              iconColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-              trailing: Text(
-                '10 unidades',
-                style: Theme.of(context).textTheme.labelMedium!,
-              ),
-            );
-          },
-        ),
+        child: FutureBuilder(
+            future: ref.watch(shopItemProvider.notifier).fetch(),
+            builder: (_, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: _controller.fetch(ref).length,
+                  itemBuilder: (_, index) {
+                    final shopItem = _controller.fetch(ref)[index];
+                    return ListItemWidget(shopItem: shopItem);
+                  },
+                );
+              }
+            }),
       ),
     );
   }

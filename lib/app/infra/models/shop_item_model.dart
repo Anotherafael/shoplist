@@ -5,6 +5,7 @@ import '../../domain/entities/shop_item_entity.dart';
 class ShopItemModel implements ShopItemEntity {
   ShopItemModel({
     required this.name,
+    required this.quantity,
   }) : id = const Uuid().v4();
 
   @override
@@ -12,4 +13,7 @@ class ShopItemModel implements ShopItemEntity {
 
   @override
   String name;
+
+  @override
+  int quantity;
 }

@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future<dynamic>.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 2),
       () => _navigationService.replacementToNamed(RouteStrings.list),
     );
   }
