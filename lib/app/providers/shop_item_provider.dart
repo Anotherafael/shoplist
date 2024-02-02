@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shoplist/app/infra/mocked_data/shopitems_mock.dart';
 import 'package:shoplist/app/presenter/core/injection_container.dart';
 
 import '../domain/entities/shop_item_entity.dart';
@@ -14,6 +13,14 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemEntity>> {
     response.fold(
       (l) => null,
       (r) => state = r,
+    );
+  }
+
+  Future<void> add(ShopItemEntity item) async {
+    final response = await _repository.add(item);
+    response.fold(
+      (l) => null,
+      (r) => state = [...state, item],
     );
   }
 }

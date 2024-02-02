@@ -9,5 +9,17 @@ class AppTheme {
           brightness: Brightness.light,
         ),
         textTheme: GoogleFonts.poppinsTextTheme(),
+        appBarTheme: AppBarTheme(
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          backgroundColor: const Color.fromARGB(255, 95, 12, 190),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: GoogleFonts.poppins().fontFamily,
+          ),
+        ),
       );
 }

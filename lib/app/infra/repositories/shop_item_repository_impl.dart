@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:shoplist/app/infra/datasources/add_shop_item_source.dart';
-import 'package:shoplist/app/infra/mocked_data/shopitems_mock.dart';
+import 'package:shoplist/app/infra/datasources/shop_item_source.dart';
 import 'package:shoplist/app/infra/models/shop_item_model.dart';
 
 import '../../domain/core/error/failures.dart';
@@ -9,15 +8,15 @@ import '../../domain/repositories/shop_item_repository.dart';
 
 class ShopItemRepository implements IShopItemRepository {
   ShopItemRepository({
-    required ShopItemSource addShopItemSource,
-  }) : _addShopItemSource = addShopItemSource;
+    required ShopItemSource shopItemSource,
+  }) : _shopItemSource = shopItemSource;
 
-  final ShopItemSource _addShopItemSource;
+  final ShopItemSource _shopItemSource;
 
   @override
   Future<Either<Failure, Unit>> add(ShopItemEntity item) async {
     try {
-      await _addShopItemSource.add(item);
+      await _shopItemSource.add(item);
       return right(unit);
     } catch (e) {
       return Left(DatabaseFailure());
@@ -25,11 +24,13 @@ class ShopItemRepository implements IShopItemRepository {
   }
 
   @override
-  Future<Either<Failure, List<ShopItemModel>>> fetch() {
-    if (shopItemsMock.isEmpty) {
-      return Future.value(left(EmptyList()));
-    } else {
-      return Future.value(right(shopItemsMock));
+  Future<Either<Failure, List<ShopItemModel>>> fetch() async {
+    try {
+      List<ShopItemModel> shopItems =
+          await _shopItemSource.fetch() as List<ShopItemModel>;
+      return right(shopItems);
+    } catch (e) {
+      return Left(DatabaseFailure());
     }
   }
 }

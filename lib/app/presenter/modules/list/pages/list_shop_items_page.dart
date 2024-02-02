@@ -4,36 +4,33 @@ import 'package:shoplist/app/presenter/core/injection_container.dart';
 import 'package:shoplist/app/presenter/modules/list/components/list_item.dart';
 import 'package:shoplist/app/providers/shop_item_provider.dart';
 
-import '../../../../infra/models/shop_item_model.dart';
-import '../controllers/list_page_controller.dart';
+import '../../../core/navigation_service.dart';
+import '../../../core/routes/route_strings.dart';
+import '../controllers/list_shop_items_page_controller.dart';
 
-class ListPage extends ConsumerStatefulWidget {
-  const ListPage({super.key});
+class ListShopItemsPage extends ConsumerStatefulWidget {
+  const ListShopItemsPage({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ListPageState();
 }
 
-class _ListPageState extends ConsumerState<ListPage> {
+class _ListPageState extends ConsumerState<ListShopItemsPage> {
   final _controller = getIt<ListPageController>();
+  final _navigationService = getIt<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
+        title: const Text(
           'Compras à realizar',
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(
+            onPressed: () => _navigationService.toNamed(RouteStrings.add),
+            icon: const Icon(
               Icons.add_shopping_cart,
-              color: Theme.of(context).colorScheme.onPrimary,
             ),
           )
         ],

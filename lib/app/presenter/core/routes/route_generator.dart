@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shoplist/app/presenter/modules/list/pages/list_page.dart';
+import 'package:shoplist/app/presenter/modules/list/pages/list_shop_items_page.dart';
 import 'package:shoplist/app/presenter/modules/splash/splash_page.dart';
 
+import '../../modules/add/pages/add_shop_item_page.dart';
 import 'route_strings.dart';
 
 class RouteGenerator {
@@ -16,16 +17,12 @@ class RouteGenerator {
 
       case RouteStrings.list:
         return MaterialPageRoute(
-          builder: (context) => const ListPage(),
+          builder: (context) => const ListShopItemsPage(),
         );
 
       case RouteStrings.add:
         return MaterialPageRoute(
-          builder: (context) => Scaffold(
-            appBar: AppBar(
-              title: const Text('Add Item'),
-            ),
-          ),
+          builder: (context) => const AddShopItemPage(),
         );
 
       default:

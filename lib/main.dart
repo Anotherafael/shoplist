@@ -7,6 +7,7 @@ import 'app/presenter/core/injection_container.dart' as di;
 import 'app/presenter/core/navigation_service.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(
     ProviderScope(
