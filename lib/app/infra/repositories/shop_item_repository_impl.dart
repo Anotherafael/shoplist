@@ -14,6 +14,17 @@ class ShopItemRepository implements IShopItemRepository {
   final ShopItemSource _shopItemSource;
 
   @override
+  Future<Either<Failure, List<ShopItemModel>>> fetch() async {
+    try {
+      List<ShopItemModel> shopItems =
+          await _shopItemSource.fetch() as List<ShopItemModel>;
+      return right(shopItems);
+    } catch (e) {
+      return Left(DatabaseFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, Unit>> add(ShopItemEntity item) async {
     try {
       await _shopItemSource.add(item);
@@ -24,11 +35,10 @@ class ShopItemRepository implements IShopItemRepository {
   }
 
   @override
-  Future<Either<Failure, List<ShopItemModel>>> fetch() async {
+  Future<Either<Failure, Unit>> delete(ShopItemEntity item) async {
     try {
-      List<ShopItemModel> shopItems =
-          await _shopItemSource.fetch() as List<ShopItemModel>;
-      return right(shopItems);
+      await _shopItemSource.delete(item);
+      return right(unit);
     } catch (e) {
       return Left(DatabaseFailure());
     }

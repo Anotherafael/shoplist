@@ -4,6 +4,7 @@ import 'package:shoplist/app/infra/models/shop_item_model.dart';
 
 abstract class IShopItemSource {
   Future<void> add(ShopItemEntity item);
+  Future<void> delete(ShopItemEntity item);
   Future<List<ShopItemEntity>> fetch();
 }
 
@@ -18,5 +19,10 @@ class ShopItemSource implements IShopItemSource {
   @override
   Future<List<ShopItemEntity>> fetch() {
     return Future.value(shopItemList as List<ShopItemModel>);
+  }
+
+  @override
+  Future<void> delete(ShopItemEntity item) async {
+    shopItemList.removeWhere((element) => element == item);
   }
 }

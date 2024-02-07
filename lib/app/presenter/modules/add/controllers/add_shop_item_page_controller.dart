@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shoplist/app/infra/models/shop_item_model.dart';
 
-import '../../../../providers/shop_item_provider.dart';
+import '../../../../infra/providers/shop_item_provider.dart';
 import '../../../core/injection_container.dart';
 import '../../../core/navigation_service.dart';
 import '../../../core/routes/route_strings.dart';

@@ -5,5 +5,6 @@ import '../entities/shop_item_entity.dart';
 
 abstract class IShopItemRepository {
   Future<Either<Failure, Unit>> add(ShopItemEntity item);
+  Future<Either<Failure, Unit>> delete(ShopItemEntity item);
   Future<Either<Failure, List<ShopItemEntity>>> fetch();
 }
