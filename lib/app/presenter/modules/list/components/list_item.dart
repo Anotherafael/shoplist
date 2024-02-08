@@ -21,20 +21,25 @@ class ListItemWidget extends ConsumerWidget {
       onDismissed: (_) {
         controller.delete(ref, shopItem);
       },
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          child: const Icon(
-            Icons.shopping_cart,
-            color: Colors.white,
+      child: InkWell(
+        onTap: () {
+          controller.pushToDetails(shopItem);
+        },
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: const Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
           ),
-        ),
-        title: Text(shopItem.name),
-        subtitle: const Text('Categoria'),
-        iconColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-        trailing: Text(
-          '${shopItem.quantity} unidades',
-          style: Theme.of(context).textTheme.labelMedium!,
+          title: Text(shopItem.name),
+          subtitle: const Text('Categoria'),
+          iconColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+          trailing: Text(
+            '${shopItem.quantity} unidades',
+            style: Theme.of(context).textTheme.labelMedium!,
+          ),
         ),
       ),
     );

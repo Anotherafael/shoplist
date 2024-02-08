@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shoplist/app/presenter/modules/detail/pages/detail_shop_item_page.dart';
 import 'package:shoplist/app/presenter/modules/list/pages/list_shop_items_page.dart';
 import 'package:shoplist/app/presenter/modules/splash/splash_page.dart';
 
+import '../../../infra/models/shop_item_model.dart';
 import '../../modules/add/pages/add_shop_item_page.dart';
 import 'route_strings.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // final args = settings.arguments;
+    final args = settings.arguments;
 
     switch (settings.name) {
       case RouteStrings.root:
@@ -23,6 +25,13 @@ class RouteGenerator {
       case RouteStrings.add:
         return MaterialPageRoute(
           builder: (context) => const AddShopItemPage(),
+        );
+
+      case RouteStrings.detail:
+        return MaterialPageRoute(
+          builder: (context) => DetailShopItemPage(
+            shopItem: args as ShopItemModel,
+          ),
         );
 
       default:

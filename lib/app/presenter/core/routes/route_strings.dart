@@ -6,4 +6,6 @@ class RouteStrings {
   static const list = '/list';
 
   static const add = '/add';
+
+  static const detail = '/detail';
 }
