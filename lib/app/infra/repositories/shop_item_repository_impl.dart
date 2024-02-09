@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:shoplist/app/infra/datasources/shop_item_source.dart';
+import 'package:shoplist/app/infra/datasources/shop_item_source_impl.dart';
 import 'package:shoplist/app/infra/models/shop_item_model.dart';
 
 import '../../domain/core/error/failures.dart';
