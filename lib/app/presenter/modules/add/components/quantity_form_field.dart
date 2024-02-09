@@ -13,10 +13,16 @@ class QuantityFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Quantidade',
+        labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
         hintText: 'Quantidade',
-        border: OutlineInputBorder(
+        hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(8),
           ),

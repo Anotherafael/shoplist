@@ -23,6 +23,7 @@ class _ListPageState extends ConsumerState<ListShopItemsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Compras à realizar',
         ),

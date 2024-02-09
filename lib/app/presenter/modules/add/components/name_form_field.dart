@@ -13,10 +13,16 @@ class NameFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Nome',
+        labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
         hintText: 'Nome do item',
-        border: OutlineInputBorder(
+        hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(8),
           ),
