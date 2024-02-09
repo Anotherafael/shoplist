@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shoplist/app/infra/models/category_model.dart';
 import 'package:shoplist/app/infra/models/shop_item_model.dart';
+import 'package:shoplist/app/infra/providers/categories.provider.dart';
 
 import '../../../../infra/providers/shop_item_provider.dart';
 import '../../../core/injection_container.dart';
@@ -13,6 +15,7 @@ class AddShopItemPageController {
   final _navigationService = getIt<NavigationService>();
   static late String name;
   static late int quantity;
+  static late CategoryModel category;
 
   Future<void> add(WidgetRef ref, GlobalKey<FormState> formKey) async {
     if (formKey.currentState!.validate()) {
@@ -20,7 +23,7 @@ class AddShopItemPageController {
         ref.read(isLoadingOnAddShopItem.notifier).state = true;
       }
       formKey.currentState!.save();
-      final shopItem = createModel(name, quantity);
+      final shopItem = createModel(name, quantity, category);
       ref.read(shopItemProvider).add(shopItem);
       Future.delayed(Durations.extralong4);
       ref.read(isLoadingOnAddShopItem.notifier).state = false;
@@ -28,8 +31,40 @@ class AddShopItemPageController {
     }
   }
 
-  ShopItemModel createModel(String name, int quantity) {
-    final shopItem = ShopItemModel(name: name, quantity: quantity);
+  List<DropdownMenuItem<Object>>? fetch(WidgetRef ref) {
+    ref.watch(categoriesProvider.notifier).fetch();
+    return ref
+        .watch(categoriesProvider)
+        .values
+        .map<DropdownMenuItem<Object>>(
+          (category) => DropdownMenuItem(
+            value: category,
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 16,
+                  backgroundColor: category.color.withOpacity(0.6),
+                  child: Icon(
+                    size: 20,
+                    category.icon,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(category.name),
+              ],
+            ),
+          ),
+        )
+        .toList();
+  }
+
+  ShopItemModel createModel(String name, int quantity, CategoryModel category) {
+    final shopItem = ShopItemModel(
+      name: name,
+      quantity: quantity,
+      category: category,
+    );
     return shopItem;
   }
 
@@ -44,5 +79,9 @@ class AddShopItemPageController {
 
   void setQuantity(int quantity) {
     AddShopItemPageController.quantity = quantity;
+  }
+
+  void setCategory(CategoryModel category) {
+    AddShopItemPageController.category = category;
   }
 }

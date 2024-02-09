@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shoplist/app/presenter/modules/add/components/category_form_field.dart';
 import 'package:shoplist/app/presenter/modules/add/components/form_buttons.dart';
 import 'package:shoplist/app/presenter/modules/add/components/quantity_form_field.dart';
 import '../components/name_form_field.dart';
@@ -33,6 +34,8 @@ class _AddShopItemPageState extends ConsumerState<AddShopItemPage> {
               NameFormField(),
               const SizedBox(height: 16),
               QuantityFormField(),
+              const SizedBox(height: 16),
+              CategoryFormFieldWidget(),
               const SizedBox(height: 12),
               FormButtonsWidget(
                 formKey: formKey,

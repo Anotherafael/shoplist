@@ -27,14 +27,14 @@ class ListItemWidget extends ConsumerWidget {
         },
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            child: const Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
+            backgroundColor: shopItem.category.color.withOpacity(0.6),
+            child: Icon(
+              shopItem.category.icon,
+              color: Colors.black,
             ),
           ),
           title: Text(shopItem.name),
-          subtitle: const Text('Categoria'),
+          subtitle: Text(shopItem.category.name),
           iconColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
           trailing: Text(
             '${shopItem.quantity} unidades',
