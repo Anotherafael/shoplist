@@ -1,4 +1,4 @@
-import '../models/enums/categories.dart';
+import '../../domain/enums/categories.dart';
 import '../models/shop_item_model.dart';
 import 'categories_mock.dart';
 
@@ -27,5 +27,45 @@ final shopItemsMock = [
     name: 'Chimichurri',
     quantity: 10,
     category: categoriesMock[Categories.spices]!,
+  ),
+  ShopItemModel(
+    name: 'Pão',
+    quantity: 10,
+    category: categoriesMock[Categories.carbs]!,
+  ),
+  ShopItemModel(
+    name: 'Sabão em Pó',
+    quantity: 10,
+    category: categoriesMock[Categories.homeHygiene]!,
+  ),
+  ShopItemModel(
+    name: 'Amaciante',
+    quantity: 10,
+    category: categoriesMock[Categories.homeHygiene]!,
+  ),
+  ShopItemModel(
+    name: 'Sabonete',
+    quantity: 10,
+    category: categoriesMock[Categories.personalHygiene]!,
+  ),
+  ShopItemModel(
+    name: 'Feijão',
+    quantity: 10,
+    category: categoriesMock[Categories.grains]!,
+  ),
+  ShopItemModel(
+    name: 'Arroz',
+    quantity: 10,
+    category: categoriesMock[Categories.carbs]!,
+  ),
+  ShopItemModel(
+    name: 'Macarrão',
+    quantity: 10,
+    category: categoriesMock[Categories.carbs]!,
+  ),
+  ShopItemModel(
+    name: 'Suco de Uva',
+    quantity: 10,
+    category: categoriesMock[Categories.drinks]!,
   ),
 ];

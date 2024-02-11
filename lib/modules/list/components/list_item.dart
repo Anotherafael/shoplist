@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../infra/models/shop_item_model.dart';
-import '../../../core/injection_container.dart';
+import '../../../app/infra/models/shop_item_model.dart';
+import '../../../app/presenter/core/injection_container.dart';
 import '../controllers/list_shop_items_page_controller.dart';
 
 class ListItemWidget extends ConsumerWidget {

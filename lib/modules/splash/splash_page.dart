@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shoplist/app/presenter/core/injection_container.dart';
 
-import '../../core/navigation_service.dart';
-import '../../core/routes/route_strings.dart';
+import '../../app/presenter/core/navigation_service.dart';
+import '../../app/presenter/core/routes/route_strings.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future<dynamic>.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 5),
       () => _navigationService.replacementToNamed(RouteStrings.list),
     );
   }

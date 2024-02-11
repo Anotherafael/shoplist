@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shoplist/app/domain/entities/category_entity.dart';
 import 'package:shoplist/app/infra/repositories/category_repository_impl.dart';
 
-import '../../presenter/core/injection_container.dart';
-import '../models/enums/categories.dart';
+import '../core/injection_container.dart';
+import '../../domain/enums/categories.dart';
 
 class CategoryNotifier extends StateNotifier<Map<Categories, CategoryEntity>> {
   CategoryNotifier() : super({});
@@ -18,8 +18,3 @@ class CategoryNotifier extends StateNotifier<Map<Categories, CategoryEntity>> {
     );
   }
 }
-
-final categoriesProvider =
-    StateNotifierProvider<CategoryNotifier, Map<Categories, CategoryEntity>>(
-  (ref) => CategoryNotifier(),
-);

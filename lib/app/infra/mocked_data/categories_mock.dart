@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shoplist/app/infra/models/category_model.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-import '../models/enums/categories.dart';
+import '../../domain/enums/categories.dart';
 
 Map<Categories, CategoryModel> categoriesMock = {
   Categories.fruitAndVegetables: CategoryModel(

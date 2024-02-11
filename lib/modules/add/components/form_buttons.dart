@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/injection_container.dart';
+import '../../../app/presenter/core/injection_container.dart';
 import '../controllers/add_shop_item_page_controller.dart';
 
 // ignore: must_be_immutable

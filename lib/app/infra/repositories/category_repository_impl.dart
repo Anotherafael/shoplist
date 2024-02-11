@@ -4,7 +4,7 @@ import 'package:shoplist/app/domain/entities/category_entity.dart';
 import 'package:shoplist/app/domain/repositories/category_repository.dart';
 import 'package:shoplist/app/infra/datasources/category_source_impl.dart';
 
-import '../models/enums/categories.dart';
+import '../../domain/enums/categories.dart';
 
 class CategoryRepository implements ICategoryRepository {
   CategoryRepository({

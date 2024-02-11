@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/injection_container.dart';
+import '../../../app/presenter/core/injection_container.dart';
 import '../controllers/add_shop_item_page_controller.dart';
 
 class NameFormField extends StatelessWidget {
