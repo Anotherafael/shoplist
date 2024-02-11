@@ -8,9 +8,11 @@ environment:
 
 dependencies:
   dartz: ^0.10.1
+  dio: ^5.4.0
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
   flutter_riverpod: ^2.4.9
   get_it: ^7.6.7
   google_fonts: ^6.1.0
