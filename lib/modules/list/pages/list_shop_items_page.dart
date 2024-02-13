@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shoplist/app/presenter/core/injection_container.dart';
 import 'package:shoplist/modules/list/components/list_item.dart';
-import 'package:shoplist/app/presenter/notifiers/shop_item_notifier.dart';
 
 import '../../../app/presenter/core/navigation_service.dart';
 import '../../../app/presenter/core/routes/route_strings.dart';
@@ -39,22 +38,23 @@ class _ListPageState extends ConsumerState<ListShopItemsPage> {
       body: Container(
         color: Theme.of(context).colorScheme.background,
         child: FutureBuilder(
-            future: ref.watch(shopItemProvider.notifier).fetch(),
-            builder: (_, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return ListView.builder(
-                  itemCount: _controller.fetch(ref).length,
-                  itemBuilder: (_, index) {
-                    final shopItem = _controller.fetch(ref)[index];
-                    return ListItemWidget(shopItem: shopItem);
-                  },
-                );
-              }
-            }),
+          future: _controller.fetch(ref),
+          builder: (_, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: _controller.getShopItems(ref).length,
+                itemBuilder: (_, index) {
+                  final shopItem = _controller.getShopItems(ref)[index];
+                  return ListItemWidget(shopItem: shopItem);
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }

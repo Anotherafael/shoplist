@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shoplist/app/infra/models/shop_item_model.dart';
 import 'package:shoplist/app/presenter/core/injection_container.dart';
 
-import '../../domain/entities/shop_item_entity.dart';
 import '../../infra/repositories/shop_item_repository_impl.dart';
 
-class ShopItemNotifier extends StateNotifier<List<ShopItemEntity>> {
+class ShopItemNotifier extends StateNotifier<List<ShopItemModel>> {
   ShopItemNotifier() : super([]);
 
   final _repository = getIt<ShopItemRepository>();
@@ -13,21 +14,31 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemEntity>> {
     final response = await _repository.fetch();
     response.fold(
       (l) => null,
-      (r) => state = r,
-    );
-  }
+      (r) {
+        List<ShopItemModel> list = [];
+        for (final element in r) {
+          list.add(ShopItemModel.fromEntity(element));
+        }
 
-  Future<void> add(ShopItemEntity item) async {
-    final response = await _repository.add(item);
-    response.fold(
-      (l) => null,
-      (r) async {
-        await fetch();
+        state = list;
       },
     );
   }
 
-  Future<void> delete(ShopItemEntity item) async {
+  Future<void> add(ShopItemModel item, BuildContext context) async {
+    final response = await _repository.add(item);
+    response.fold(
+      (l) => null,
+      (r) {
+        // NotificationInApp.show(
+        //   title: "Item adicionado",
+        //   context: context,
+        // );
+      },
+    );
+  }
+
+  Future<void> delete(ShopItemModel item) async {
     final response = await _repository.delete(item);
     response.fold(
       (l) => null,
@@ -39,6 +50,6 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemEntity>> {
 }
 
 final shopItemProvider =
-    StateNotifierProvider<ShopItemNotifier, List<ShopItemEntity>>(
+    StateNotifierProvider<ShopItemNotifier, List<ShopItemModel>>(
   (ref) => ShopItemNotifier(),
 );

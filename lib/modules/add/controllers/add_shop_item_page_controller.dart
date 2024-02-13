@@ -17,15 +17,17 @@ class AddShopItemPageController {
   static late int quantity;
   static late CategoryModel category;
 
-  Future<void> add(WidgetRef ref, GlobalKey<FormState> formKey) async {
+  Future<void> add(
+      WidgetRef ref, GlobalKey<FormState> formKey, BuildContext context) async {
     if (formKey.currentState!.validate()) {
       if (!ref.watch(isLoadingOnAddShopItem)) {
         ref.read(isLoadingOnAddShopItem.notifier).state = true;
       }
       formKey.currentState!.save();
       final shopItem = createModel(name, quantity, category);
-      ref.read(shopItemProvider).add(shopItem);
-      Future.delayed(Durations.extralong4);
+
+      ref.watch(shopItemProvider.notifier).add(shopItem, context);
+      // Future.delayed(Durations.extralong4);
       ref.read(isLoadingOnAddShopItem.notifier).state = false;
       _navigationService.replacementToNamed(RouteStrings.list);
     }

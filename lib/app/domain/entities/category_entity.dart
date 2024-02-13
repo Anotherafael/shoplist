@@ -1,12 +1,13 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-abstract class CategoryEntity {
-  String id;
-  String name;
-  IconData icon;
-  Color color;
+abstract class CategoryEntity extends Equatable {
+  final String id;
+  final String name;
+  final IconData icon;
+  final Color color;
 
-  CategoryEntity({
+  const CategoryEntity({
     required this.id,
     required this.name,
     required this.icon,

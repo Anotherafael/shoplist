@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -5,18 +7,65 @@ import '../../domain/entities/category_entity.dart';
 
 class CategoryModel implements CategoryEntity {
   @override
-  String id;
+  final String id;
   @override
-  String name;
+  final String name;
   @override
-  IconData icon;
+  final IconData icon;
   @override
-  Color color;
+  final Color color;
 
   CategoryModel(
-    icon, {
+    icon,
+    id, {
     required this.name,
     required this.color,
-  })  : id = const Uuid().v4(),
+  })  : id = id ?? const Uuid().v4(),
         icon = icon ?? Icons.shopping_cart;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'icon': icon.codePoint,
+      'color': color.value,
+    };
+  }
+
+  factory CategoryModel.fromMap(Map<String, dynamic> map) {
+    return CategoryModel(
+      IconData(map['icon']),
+      map['id'],
+      name: map['name'],
+      color: Color(map['color']),
+    );
+  }
+
+  String toJson() {
+    return jsonEncode(toMap());
+  }
+
+  factory CategoryModel.fromJson(String source) {
+    return CategoryModel.fromMap(jsonDecode(source));
+  }
+
+  factory CategoryModel.fromEntity(CategoryEntity entity) {
+    return CategoryModel(
+      entity.icon,
+      entity.id,
+      name: entity.name,
+      color: entity.color,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        icon,
+        color,
+      ];
+
+  @override
+  bool? get stringify => throw UnimplementedError();
 }

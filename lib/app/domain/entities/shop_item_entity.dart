@@ -1,12 +1,14 @@
+import 'package:equatable/equatable.dart';
+
 import 'category_entity.dart';
 
-abstract class ShopItemEntity {
-  String id;
-  String name;
-  int quantity;
-  CategoryEntity category;
+abstract class ShopItemEntity extends Equatable {
+  final String? id;
+  final String name;
+  final int quantity;
+  final CategoryEntity category;
 
-  ShopItemEntity({
+  const ShopItemEntity({
     required this.id,
     required this.name,
     required this.quantity,

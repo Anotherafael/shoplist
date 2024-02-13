@@ -40,7 +40,7 @@ class _FormButtonsWidgetState extends ConsumerState<FormButtonsWidget> {
           ),
           onPressed: () => ref.watch(isLoadingOnAddShopItem)
               ? null
-              : _controller.add(ref, widget.formKey),
+              : _controller.add(ref, widget.formKey, context),
           child: ref.watch(isLoadingOnAddShopItem)
               ? const SizedBox(
                   height: 16,

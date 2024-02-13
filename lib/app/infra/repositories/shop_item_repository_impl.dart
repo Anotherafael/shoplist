@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:shoplist/app/infra/datasources/shop_item_source_impl.dart';
-import 'package:shoplist/app/infra/models/shop_item_model.dart';
 
 import '../../domain/core/error/failures.dart';
 import '../../domain/entities/shop_item_entity.dart';
@@ -14,10 +13,9 @@ class ShopItemRepository implements IShopItemRepository {
   final ShopItemSource _shopItemSource;
 
   @override
-  Future<Either<Failure, List<ShopItemModel>>> fetch() async {
+  Future<Either<Failure, List<ShopItemEntity>>> fetch() async {
     try {
-      List<ShopItemModel> shopItems =
-          await _shopItemSource.fetch() as List<ShopItemModel>;
+      List<ShopItemEntity> shopItems = await _shopItemSource.fetch();
       return right(shopItems);
     } catch (e) {
       return Left(DatabaseFailure());

@@ -1,4 +1,4 @@
-import '../entities/shop_item_entity.dart';
+import 'package:shoplist/app/domain/entities/shop_item_entity.dart';
 
 abstract class IShopItemSource {
   Future<void> add(ShopItemEntity item);
