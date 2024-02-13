@@ -23,8 +23,8 @@ class ShopItemSource implements IShopItemSource {
       throw DatabaseFailure();
     }
 
-    if (response.data.isEmpty || response.data == null) {
-      return [];
+    if (response.data == null) {
+      return _shopItemList;
     }
 
     final data = response.data;
@@ -53,6 +53,15 @@ class ShopItemSource implements IShopItemSource {
 
   @override
   Future<void> delete(ShopItemEntity item) async {
+    final response = await httpClient.delete(
+      '$_baseJson.json',
+      data: ShopItemModel.fromEntity(item).toJson(),
+    );
+
+    if (response.statusCode != 200) {
+      throw DatabaseFailure();
+    }
+
     _shopItemList.removeWhere(
       (element) => element == ShopItemModel.fromEntity(item),
     );

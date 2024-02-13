@@ -9,10 +9,12 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemModel>> {
 
   final _repository = getIt<ShopItemRepository>();
 
-  Future<void> fetch() async {
+  Future<List<ShopItemModel>?> fetch() async {
     final response = await _repository.fetch();
     response.fold(
-      (l) => null,
+      (l) {
+        return state;
+      },
       (r) {
         List<ShopItemModel> list = [];
         for (final element in r) {
@@ -20,8 +22,10 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemModel>> {
         }
 
         state = list;
+        return state;
       },
     );
+    return null;
   }
 
   Future<void> add(ShopItemModel item) async {
