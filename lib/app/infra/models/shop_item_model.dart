@@ -32,9 +32,9 @@ class ShopItemModel implements ShopItemEntity {
     };
   }
 
-  factory ShopItemModel.fromMap(Map<String, dynamic> map) {
+  factory ShopItemModel.fromMap(String key, Map<String, dynamic> map) {
     return ShopItemModel(
-      id: map['id'],
+      id: key,
       name: map['name'],
       quantity: map['quantity'],
       category: CategoryModel.fromMap(map['category']),
@@ -45,9 +45,9 @@ class ShopItemModel implements ShopItemEntity {
     return json.encode(toMap());
   }
 
-  factory ShopItemModel.fromJson(String source) {
-    return ShopItemModel.fromMap(jsonDecode(source));
-  }
+  // factory ShopItemModel.fromJson(String source) {
+  //   return ShopItemModel.fromMap(jsonDecode(source));
+  // }
 
   factory ShopItemModel.fromEntity(ShopItemEntity entity) {
     return ShopItemModel(

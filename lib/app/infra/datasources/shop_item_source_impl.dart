@@ -30,7 +30,7 @@ class ShopItemSource implements IShopItemSource {
     final data = response.data;
     List<ShopItemEntity> tempShopItemList = [];
     for (var item in data.entries) {
-      final shopItem = ShopItemModel.fromMap(item.value);
+      final shopItem = ShopItemModel.fromMap(item.key, item.value);
       tempShopItemList.add(shopItem);
     }
     _shopItemList = tempShopItemList;
@@ -54,7 +54,7 @@ class ShopItemSource implements IShopItemSource {
   @override
   Future<void> delete(ShopItemEntity item) async {
     final response = await httpClient.delete(
-      '$_baseJson.json',
+      '$_baseJson/${item.id}.json',
       data: ShopItemModel.fromEntity(item).toJson(),
     );
 
