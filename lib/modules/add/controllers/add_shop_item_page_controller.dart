@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shoplist/app/infra/models/category_model.dart';
 import 'package:shoplist/app/infra/models/shop_item_model.dart';
 
+import '../../../app/presenter/components/notification_in_app/notification_in_app.dart';
 import '../../../app/presenter/core/injection_container.dart';
 import '../../../app/presenter/core/navigation_service.dart';
 import '../../../app/presenter/core/routes/route_strings.dart';
@@ -17,8 +18,7 @@ class AddShopItemPageController {
   static late int quantity;
   static late CategoryModel category;
 
-  Future<void> add(
-      WidgetRef ref, GlobalKey<FormState> formKey, BuildContext context) async {
+  Future<void> add(WidgetRef ref, GlobalKey<FormState> formKey) async {
     if (formKey.currentState!.validate()) {
       if (!ref.watch(isLoadingOnAddShopItem)) {
         ref.read(isLoadingOnAddShopItem.notifier).state = true;
@@ -26,10 +26,14 @@ class AddShopItemPageController {
       formKey.currentState!.save();
       final shopItem = createModel(name, quantity, category);
 
-      ref.watch(shopItemProvider.notifier).add(shopItem, context);
-      // Future.delayed(Durations.extralong4);
+      ref.watch(shopItemProvider.notifier).add(shopItem);
       ref.read(isLoadingOnAddShopItem.notifier).state = false;
       _navigationService.replacementToNamed(RouteStrings.list);
+      const NotificationInApp().show(
+        title: "Item adicionado",
+        context: _navigationService.navigatorKey.currentContext!,
+        color: Colors.green.shade300,
+      );
     }
   }
 

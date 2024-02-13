@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../domain/entities/category_entity.dart';
@@ -34,7 +35,7 @@ class CategoryModel implements CategoryEntity {
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
-      IconData(map['icon']),
+      IconDataOutlined(map['icon']),
       map['id'],
       name: map['name'],
       color: Color(map['color']),

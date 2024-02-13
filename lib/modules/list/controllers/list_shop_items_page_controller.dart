@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shoplist/app/infra/models/shop_item_model.dart';
 import 'package:shoplist/app/presenter/notifiers/shop_item_notifier.dart';
 
+import '../../../app/presenter/components/notification_in_app/notification_in_app.dart';
 import '../../../app/presenter/core/injection_container.dart';
 import '../../../app/presenter/core/navigation_service.dart';
 import '../../../app/presenter/core/routes/route_strings.dart';
@@ -21,6 +23,11 @@ class ListPageController {
 
   void delete(WidgetRef ref, ShopItemModel shopItem) {
     ref.read(shopItemProvider.notifier).delete(shopItem);
+    const NotificationInApp().show(
+      title: "Item removido",
+      context: _navigationService.navigatorKey.currentContext!,
+      color: Colors.red.shade300,
+    );
   }
 
   void pushToDetails(ShopItemModel shopItem) {

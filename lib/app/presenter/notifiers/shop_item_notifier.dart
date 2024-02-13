@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shoplist/app/infra/models/shop_item_model.dart';
 import 'package:shoplist/app/presenter/core/injection_container.dart';
@@ -25,16 +24,11 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemModel>> {
     );
   }
 
-  Future<void> add(ShopItemModel item, BuildContext context) async {
+  Future<void> add(ShopItemModel item) async {
     final response = await _repository.add(item);
     response.fold(
       (l) => null,
-      (r) {
-        // NotificationInApp.show(
-        //   title: "Item adicionado",
-        //   context: context,
-        // );
-      },
+      (r) => null,
     );
   }
 
@@ -42,9 +36,7 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemModel>> {
     final response = await _repository.delete(item);
     response.fold(
       (l) => null,
-      (r) async {
-        await fetch();
-      },
+      (r) => null,
     );
   }
 }
