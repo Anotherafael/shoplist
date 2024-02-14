@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shoplist/app/presenter/core/injection_container.dart';
+import 'package:shoplist/app/providers/shop_item_provider.dart';
 import 'package:shoplist/modules/list/components/list_item.dart';
 
 import '../../../app/presenter/core/navigation_service.dart';
 import '../../../app/presenter/core/routes/route_strings.dart';
-import '../../../app/presenter/notifiers/shop_item_notifier.dart';
 
 class ListShopItemsPage extends ConsumerStatefulWidget {
   const ListShopItemsPage({
@@ -21,6 +21,8 @@ class _ListPageState extends ConsumerState<ListShopItemsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final shopItems = ref.watch(shopItemStateNotifierProvider.notifier).fetch();
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -39,35 +41,30 @@ class _ListPageState extends ConsumerState<ListShopItemsPage> {
       body: Container(
         color: Theme.of(context).colorScheme.background,
         child: FutureBuilder(
-          future: ref.watch(shopItemProvider.notifier).fetch(),
-          builder: (_, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+          future: shopItems,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return snapshot.data!.isEmpty
+                  ? const Center(
+                      child: Text("Lista vazia"),
+                    )
+                  : ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return ListItemWidget(
+                          shopItem: snapshot.data![index],
+                        );
+                      },
+                    );
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            }
-
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  snapshot.error.toString(),
-                ),
+            } else {
+              return Text(
+                snapshot.error.toString(),
               );
             }
-
-            if (ref.watch(shopItemProvider).isEmpty) {
-              return const Center(
-                child: Text("Nenhum item adicionado"),
-              );
-            }
-
-            return ListView.builder(
-              itemCount: ref.watch(shopItemProvider).length,
-              itemBuilder: (_, index) {
-                final shopItem = ref.watch(shopItemProvider)[index];
-                return ListItemWidget(shopItem: shopItem);
-              },
-            );
           },
         ),
       ),

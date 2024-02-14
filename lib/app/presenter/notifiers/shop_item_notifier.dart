@@ -9,30 +9,33 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemModel>> {
 
   final _repository = getIt<ShopItemRepository>();
 
-  Future<void> fetch() async {
+  Future<List<ShopItemModel>> fetch() async {
     final response = await _repository.fetch();
-    response.fold(
-      (l) => null,
+    return response.fold(
+      (l) {
+        return state = [];
+      },
       (r) {
         state = [];
         for (final element in r) {
           state.add(ShopItemModel.fromEntity(element));
         }
+        return state;
       },
     );
   }
 
-  Future<void> add(ShopItemModel item) async {
+  void add(ShopItemModel item) async {
     final response = await _repository.add(item);
     response.fold(
       (l) => null,
-      (r) async {
-        await fetch();
+      (r) {
+        state = [...state, item];
       },
     );
   }
 
-  Future<void> delete(ShopItemModel item) async {
+  void delete(ShopItemModel item) async {
     final response = await _repository.delete(item);
     response.fold(
       (l) => null,

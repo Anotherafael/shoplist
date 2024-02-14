@@ -13,11 +13,7 @@ class ListPageController {
 
   final _navigationService = getIt<NavigationService>();
 
-  bool isShopItemsListEmpty(WidgetRef ref) {
-    return ref.read(shopItemProvider).isEmpty;
-  }
-
-  void delete(WidgetRef ref, ShopItemModel shopItem) {
+  void delete(WidgetRef ref, ShopItemModel shopItem) async {
     ref.read(shopItemProvider.notifier).delete(shopItem);
     const NotificationInApp().show(
       title: "Item removido",

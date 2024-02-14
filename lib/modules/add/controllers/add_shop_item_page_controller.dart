@@ -18,17 +18,21 @@ class AddShopItemPageController {
   static late int quantity;
   static late CategoryModel category;
 
-  Future<void> add(WidgetRef ref, GlobalKey<FormState> formKey) async {
+  void add(WidgetRef ref, GlobalKey<FormState> formKey) async {
     if (formKey.currentState!.validate()) {
-      if (!ref.watch(isLoadingOnAddShopItem)) {
+      if (!ref.read(isLoadingOnAddShopItem)) {
         ref.read(isLoadingOnAddShopItem.notifier).state = true;
+        Future.delayed(Durations.extralong4);
       }
+
       formKey.currentState!.save();
       final shopItem = createModel(name, quantity, category);
 
-      ref.read(shopItemProvider.notifier).add(shopItem);
+      ref.read(shopItemStateNotifierProvider.notifier).add(shopItem);
+
       ref.read(isLoadingOnAddShopItem.notifier).state = false;
-      _navigationService.removeToNamed(RouteStrings.list);
+
+      _navigationService.toNamed(RouteStrings.list);
 
       const NotificationInApp().show(
         title: "Item adicionado",
