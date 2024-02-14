@@ -14,7 +14,7 @@ class AddShopItemPage extends ConsumerStatefulWidget {
 }
 
 class _AddShopItemPageState extends ConsumerState<AddShopItemPage> {
-  static final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

@@ -63,7 +63,7 @@ class ShopItemSource implements IShopItemSource {
     }
 
     _shopItemList.removeWhere(
-      (element) => element == ShopItemModel.fromEntity(item),
+      (element) => element.id == item.id,
     );
   }
 }

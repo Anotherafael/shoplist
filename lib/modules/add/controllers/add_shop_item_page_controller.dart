@@ -26,9 +26,10 @@ class AddShopItemPageController {
       formKey.currentState!.save();
       final shopItem = createModel(name, quantity, category);
 
-      ref.watch(shopItemProvider.notifier).add(shopItem);
+      ref.read(shopItemProvider.notifier).add(shopItem);
       ref.read(isLoadingOnAddShopItem.notifier).state = false;
-      _navigationService.replacementToNamed(RouteStrings.list);
+      _navigationService.removeToNamed(RouteStrings.list);
+
       const NotificationInApp().show(
         title: "Item adicionado",
         context: _navigationService.navigatorKey.currentContext!,
@@ -76,7 +77,7 @@ class AddShopItemPageController {
 
   void clearInputs(GlobalKey<FormState> formKey) {
     formKey.currentState!.reset();
-    _navigationService.toNamed(RouteStrings.list);
+    _navigationService.back();
   }
 
   void setName(String name) {

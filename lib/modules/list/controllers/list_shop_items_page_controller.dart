@@ -13,11 +13,8 @@ class ListPageController {
 
   final _navigationService = getIt<NavigationService>();
 
-  Future<List<ShopItemModel>?> fetch(WidgetRef ref) =>
-      ref.read(shopItemProvider.notifier).fetch();
-
-  List<ShopItemModel> getShopItems(WidgetRef ref) {
-    return ref.watch(shopItemProvider);
+  bool isShopItemsListEmpty(WidgetRef ref) {
+    return ref.read(shopItemProvider).isEmpty;
   }
 
   void delete(WidgetRef ref, ShopItemModel shopItem) {
