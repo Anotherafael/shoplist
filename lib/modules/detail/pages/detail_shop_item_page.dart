@@ -25,6 +25,10 @@ class DetailShopItemPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
+              shopItem.id!,
+              textAlign: TextAlign.center,
+            ),
+            Text(
               shopItem.name,
               textAlign: TextAlign.center,
             ),

@@ -17,18 +17,57 @@ class ListItemWidget extends ConsumerStatefulWidget {
 }
 
 class _ListItemWidgetState extends ConsumerState<ListItemWidget> {
-  final controller = getIt<ListPageController>();
+  final _controller = getIt<ListPageController>();
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: ValueKey(widget.shopItem.id),
-      onDismissed: (_) {
-        controller.delete(ref, widget.shopItem);
+    return InkWell(
+      onTap: () {
+        _controller.pushToDetails(widget.shopItem);
       },
-      child: InkWell(
-        onTap: () {
-          controller.pushToDetails(widget.shopItem);
+      child: Dismissible(
+        key: ObjectKey(widget.shopItem),
+        onDismissed: (direction) async {
+          if (direction == DismissDirection.endToStart) {
+            await _controller.delete(ref, widget.shopItem);
+          }
+        },
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.endToStart) {
+            return await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text(
+                    'Remover',
+                  ),
+                  content: const Text(
+                    'Tem certeza que deseja remover o item?',
+                  ),
+                  actions: [
+                    TextButton(
+                      child: const Text(
+                        'Não',
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                    ),
+                    TextButton(
+                      child: const Text(
+                        'Sim',
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    )
+                  ],
+                );
+              },
+            );
+          } else {
+            return false;
+          }
         },
         child: ListTile(
           leading: CircleAvatar(
