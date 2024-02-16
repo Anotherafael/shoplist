@@ -25,26 +25,21 @@ class ShopItemNotifier extends StateNotifier<List<ShopItemModel>> {
     );
   }
 
-  void add(ShopItemModel item) async {
+  Future<void> add(ShopItemModel item) async {
     final response = await _repository.add(item);
     response.fold(
       (l) => null,
-      (r) {
-        state = [...state, item];
-      },
+      (r) => state = [...state, item],
     );
   }
 
-  void delete(ShopItemModel item) async {
+  Future<void> delete(ShopItemModel item) async {
     final response = await _repository.delete(item);
     response.fold(
       (l) => null,
-      (r) => state.removeWhere((element) => element.id == item.id),
+      (r) {
+        state = [...state.where((element) => element.id != item.id)];
+      },
     );
   }
 }
-
-final shopItemProvider =
-    StateNotifierProvider<ShopItemNotifier, List<ShopItemModel>>(
-  (ref) => ShopItemNotifier(),
-);

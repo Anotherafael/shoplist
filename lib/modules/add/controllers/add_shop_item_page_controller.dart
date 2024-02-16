@@ -22,17 +22,17 @@ class AddShopItemPageController {
     if (formKey.currentState!.validate()) {
       if (!ref.read(isLoadingOnAddShopItem)) {
         ref.read(isLoadingOnAddShopItem.notifier).state = true;
-        Future.delayed(Durations.extralong4);
+        Future.delayed(const Duration(seconds: 3));
       }
 
       formKey.currentState!.save();
       final shopItem = createModel(name, quantity, category);
 
-      ref.read(shopItemStateNotifierProvider.notifier).add(shopItem);
+      await ref.read(shopItemStateNotifierProvider.notifier).add(shopItem);
 
       ref.read(isLoadingOnAddShopItem.notifier).state = false;
 
-      _navigationService.toNamed(RouteStrings.list);
+      _navigationService.removeToNamed(RouteStrings.list);
 
       const NotificationInApp().show(
         title: "Item adicionado",

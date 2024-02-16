@@ -29,6 +29,18 @@ Future<void> init() async {
   //Core
   getIt.registerLazySingleton(() => HttpClient());
 
+  //Notifiers
+  // getIt.registerFactory(
+  //   () => ShopItemNotifier(),
+  // );
+
+  //Providers
+  // getIt.registerFactory(
+  //   () => StateNotifierProvider<ShopItemNotifier, List<ShopItemModel>>(
+  //     (ref) => getIt<ShopItemNotifier>(),
+  //   ),
+  // );
+
   //Datasources
   getIt.registerLazySingleton(() => ShopItemSource(httpClient: getIt()));
   getIt.registerLazySingleton(() => CategorySource());

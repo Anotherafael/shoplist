@@ -26,4 +26,8 @@ class NavigationService {
       (route) => route.isFirst,
     );
   }
+
+  void pop(bool? result) {
+    return navigatorKey.currentState!.pop(result);
+  }
 }

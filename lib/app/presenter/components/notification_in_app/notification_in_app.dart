@@ -13,7 +13,7 @@ class NotificationInApp {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: color ?? Theme.of(context).colorScheme.primary,
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 1),
         content: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
