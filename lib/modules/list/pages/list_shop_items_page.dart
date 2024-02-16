@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shoplist/app/infra/models/shop_item_model.dart';
 import 'package:shoplist/app/presenter/core/injection_container.dart';
 import 'package:shoplist/app/providers/shop_item_provider.dart';
 import 'package:shoplist/modules/list/components/list_item.dart';
