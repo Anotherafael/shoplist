@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoplist/modules/auth/pages/login_page.dart';
 import 'package:shoplist/modules/detail/pages/detail_shop_item_page.dart';
 import 'package:shoplist/modules/list/pages/list_shop_items_page.dart';
 import 'package:shoplist/modules/splash/splash_page.dart';
@@ -32,6 +33,11 @@ class RouteGenerator {
           builder: (context) => DetailShopItemPage(
             shopItem: args as ShopItemModel,
           ),
+        );
+
+      case RouteStrings.login:
+        return MaterialPageRoute(
+          builder: (context) => const LoginPage(),
         );
 
       default:

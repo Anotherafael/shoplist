@@ -23,7 +23,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       const Duration(seconds: 3),
       () {
         _navigationService.replaceToNamed(
-          RouteStrings.list,
+          RouteStrings.login,
         );
       },
     );

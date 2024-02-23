@@ -8,4 +8,6 @@ class RouteStrings {
   static const add = '/add';
 
   static const detail = '/detail';
+
+  static const login = '/login';
 }
