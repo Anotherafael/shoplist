@@ -24,23 +24,25 @@ class _AddShopItemPageState extends ConsumerState<AddShopItemPage> {
           'Adicionar item',
         ),
       ),
-      body: Form(
-        key: formKey,
-        child: Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 10),
-          child: Column(
-            children: [
-              NameFormField(),
-              const SizedBox(height: 16),
-              QuantityFormField(),
-              const SizedBox(height: 16),
-              CategoryFormFieldWidget(),
-              const SizedBox(height: 12),
-              FormButtonsWidget(
-                formKey: formKey,
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 10),
+            child: Column(
+              children: [
+                NameFormField(),
+                const SizedBox(height: 16),
+                QuantityFormField(),
+                const SizedBox(height: 16),
+                CategoryFormFieldWidget(),
+                const SizedBox(height: 12),
+                FormButtonsWidget(
+                  formKey: formKey,
+                ),
+              ],
+            ),
           ),
         ),
       ),
